@@ -1,16 +1,9 @@
-# This is a sample Python script.
+import requests
+import json  # импортируем необходимую библиотеку
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+r = requests.get('https://baconipsum.com/api/?type=meat-and-filler')
+texts = json.loads(r.content)  # делаем из полученных байтов python объект для удобной работы
+print(type(texts))  # проверяем тип сконвертированных данных
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+for text in texts:  # выводим полученный текст. Но для того чтобы он влез в консоль оставим только первые 50 символов.
+    print(text[:50], '\n')
